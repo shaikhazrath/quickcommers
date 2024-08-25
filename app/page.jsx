@@ -1,10 +1,38 @@
 'use client'
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import NavBar from './components/home/NavBar'
 import ProductsCategory from './components/home/ProductsCategory'
 import Banner from './components/home/Banner'
 import CartOrder from './components/CartOrders'
 const page = () => {
+  useEffect(() => {
+    const fetchLocation = async (lat, lng) => {
+      try {
+        const response = await fetch(`https://api.olamaps.io/places/v1/reverse-geocode?latlng=${lat},${lng}&api_key=sZSytl79psJ38265tWRRj6RRZzTqU4zCQvXglZo4`);
+        if (!response.ok) throw new Error('Failed to fetch location data');
+        const data = await response.json();
+         localStorage.setItem('selectedLocation',data.results[0].formatted_address)
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+
+    const getUserLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            fetchLocation(latitude, longitude);
+          },
+          () => setError('Unable to retrieve your location')
+        );
+      } else {
+        setError('Geolocation is not supported by your browser');
+      }
+    };
+
+    getUserLocation();
+  }, []);
   return (
     <div className=' flex flex-col gap-2 '>
       <NavBar/>

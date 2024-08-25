@@ -26,7 +26,7 @@ const NavBar = () => {
                         QuickDev
                     </h1>
                     <Link href={'/location'} className='text-base font-semibold flex items-center py-2'>
-                        <h1 >      {truncateText(location, 5)}
+                        <h1 cla>      {truncateText(location, 5)}
                         </h1>
                         <ChevronDown />
                     </Link>
