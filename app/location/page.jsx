@@ -51,6 +51,7 @@ const OlaMapsAutocomplete = () => {
           zoom: 17
         });
         setLocationData(data.results[0].formatted_address);
+         localStorage.setItem('selectedLocation',data.results[0].formatted_address)
       } catch (err) {
         setError(err.message);
       }
@@ -117,6 +118,7 @@ const OlaMapsAutocomplete = () => {
                   setLocationData(suggestion.description);
                   setSearchText('');
                   setSuggestions([]);
+                  localStorage.setItem('selectedLocation',suggestion.description)
 
                   setViewState({
                     longitude: suggestion.geometry.location.lng,
@@ -135,7 +137,7 @@ const OlaMapsAutocomplete = () => {
         <div className='flex items-center gap-2 pb-2'>
           <FaLocationArrow className='text-cyan-400' />
           <h1 className="font-bold text-2xl bg-gradient-to-r from-cyan-400 to-white text-transparent bg-clip-text">
-            Current location
+            Current Selected location
           </h1>
         </div>
         {error ? (
@@ -152,12 +154,12 @@ const OlaMapsAutocomplete = () => {
       <DeckGL
       
       style={{
-        borderRadius: '10px', // Rounded corners
-        width: '100%', // Full width
-        height: '500px', // Fixed height for card-like appearance
-        overflow: 'hidden', // Hide any overflow
-        position: 'relative', // Relative positioning for child elements
-        boxShadow: '0 4px 8px rgba(0,0,0,0.2)', // Shadow for card effect
+        borderRadius: '10px',
+        width: '100%', 
+        height: '320px', 
+        overflow: 'hidden', 
+        position: 'relative', 
+        boxShadow: '0 4px 8px rgba(0,0,0,0.2)', 
       }}    viewState={viewState}
     onViewStateChange={({ viewState }) => setViewState(viewState)}
     controller={true}

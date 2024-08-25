@@ -1,9 +1,23 @@
 import { ShoppingCart, Search, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { CiUser } from "react-icons/ci";
 
 const NavBar = () => {
+    const [location, setLocation] = useState('');
+
+    useEffect(() => {
+      const storedLocation = localStorage.getItem('selectedLocation');
+      setLocation(storedLocation || 'Default Location'); 
+    }, []);
+
+  const truncateText = (text, wordLimit) => {
+    const words = text.split(' ');
+    if (words.length > wordLimit) {
+      return `${words.slice(0, wordLimit).join(' ')}…`;
+    }
+    return text;
+  };
     return (
         <div className=' text-white py-5 px-2 flex flex-col space-y-2 bg-[#161616] rounded-b-xl' >
             <div className='flex  justify-between items-center mx-2'>
@@ -12,7 +26,8 @@ const NavBar = () => {
                         QuickDev
                     </h1>
                     <Link href={'/location'} className='text-base font-semibold flex items-center py-2'>
-                        <h1 >anits hostel tagarapuvalsa</h1>
+                        <h1 >      {truncateText(location, 5)}
+                        </h1>
                         <ChevronDown />
                     </Link>
                 </div>
