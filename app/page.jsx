@@ -4,7 +4,7 @@ import NavBar from './components/home/NavBar'
 import ProductsCategory from './components/home/ProductsCategory'
 import Banner from './components/home/Banner'
 import CartOrder from './components/CartOrders'
-const page = () => {
+const Page = () => {
   useEffect(() => {
     const fetchLocation = async (lat, lng) => {
       try {
@@ -50,4 +50,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
