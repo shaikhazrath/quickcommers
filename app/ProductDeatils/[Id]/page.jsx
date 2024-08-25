@@ -4,7 +4,7 @@ import React from 'react'
 import { ShoppingCart } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import CartOrders from '@/app/components/CartOrders'
-const page = () => {
+const Page = () => {
   const router = useRouter()
   return (
     <div>
@@ -48,4 +48,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
